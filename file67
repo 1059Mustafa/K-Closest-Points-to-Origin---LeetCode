@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) 
+    {
+        // pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<
+        priority_queue<pair<int,pair<int,int>>>minh;
+        
+        for(int i=0;i<points.size();i++)
+        {
+            int t= points[i][0]*points[i][0]+points[i][1]*points[i][1];
+            minh.push({t,{points[i][0],points[i][1]}});
+            if(minh.size()>k)
+            {
+                minh.pop();
+            }
+        }
+        
+        vector<vector<int>>v;
+        
+        while(minh.size()>0)
+        {
+            pair<int,pair<int,int>>p=minh.top();
+            minh.pop();
+            v.push_back({p.second.first,p.second.second});
+        }
+        
+        return v;
+        
+    }
+};
